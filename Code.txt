@@ -1,0 +1,143 @@
+# bluetooth-based-forest-fire-alerting-
+bluetooth based forest fire alerting 
+
+
+#include "dht.h"
+#include <SoftwareSerial.h>
+
+#define sen1 A0
+#define sen2 A1
+#define sen3 A2
+#define sen4 A3
+
+#define buzz 7
+
+dht DHT1;
+dht DHT2;
+dht DHT3;
+dht DHT4;
+
+SoftwareSerial BTmodule(9,10); //tx rx
+
+
+void setup() {
+  
+  
+  Serial.begin(9600);
+  BTmodule.begin(9600);
+  pinMode(buzz, OUTPUT);
+  delay(500);
+}
+
+void loop() {
+
+  
+  DHT1.read11(sen1);
+  
+  Serial.print("Temperature in Celsius");
+  Serial.print(DHT1.temperature);
+  Serial.print("    Current humidity = ");
+  Serial.print(DHT1.humidity);
+  Serial.println();
+  
+  DHT2.read11(sen2);
+  
+  Serial.print("Temperature in Celsius");
+  Serial.print(DHT2.temperature);
+  Serial.print("    Current humidity = ");
+  Serial.print(DHT2.humidity);
+  Serial.println();
+  
+  DHT3.read11(sen3);
+  
+  Serial.print("Temperature in Celsius");
+  Serial.print(DHT3.temperature);
+  Serial.print("    Current humidity = ");
+  Serial.print(DHT3.humidity);
+  Serial.println();
+
+  DHT4.read11(sen4);
+  
+  Serial.print("Temperature in Celsius");
+  Serial.print(DHT4.temperature);
+  Serial.print("    Current humidity = ");
+  Serial.print(DHT4.humidity);
+  Serial.println();
+
+  delay(1000);
+  
+  Serial.println();
+    if(DHT1.temperature > 70.0 || DHT1.humidity < 20.0 )
+    {
+        digitalWrite(buzz, HIGH);
+
+        BTmodule.print("Temperature in Celsius");
+        BTmodule.print(DHT1.temperature);
+        BTmodule.print("    Current humidity = ");
+        BTmodule.print(DHT1.humidity);
+        BTmodule.println();
+        
+        Serial.println("FIRE ALERT !!!!!");
+        BTmodule.println("FIRE ALERT !!!!!");
+      
+        BTmodule.println("Might be Fire in the grid One");
+        Serial.println("Might be Fire in the grid One");
+    }
+    delay(1000);
+    Serial.println();
+    if(DHT2.temperature > 70.0 || DHT2.humidity < 20.0 )
+    {
+        digitalWrite(buzz, HIGH);
+
+        BTmodule.print("Temperature in Celsius");
+        BTmodule.print(DHT2.temperature);
+        BTmodule.print("    Current humidity = ");
+        BTmodule.print(DHT2.humidity);
+        BTmodule.println();
+         
+        Serial.println("FIRE ALERT !!!!!");
+        BTmodule.println("FIRE ALERT !!!!!");
+
+        BTmodule.println("Might be Fire in the grid Two");
+        Serial.println("Might be Fire in the grid Two");
+    }
+    delay(1000);
+    Serial.println();
+    if(DHT3.temperature > 70.0 || DHT3.humidity < 20.0 )
+    {
+        digitalWrite(buzz, HIGH);
+
+        BTmodule.print("Temperature in Celsius");
+        BTmodule.print(DHT3.temperature);
+        BTmodule.print("    Current humidity = ");
+        BTmodule.print(DHT3.humidity);
+        BTmodule.println();
+   
+        Serial.println("FIRE ALERT !!!!!");
+        BTmodule.println("FIRE ALERT !!!!!");
+
+        BTmodule.println("Might be Fire in the grid Three");
+        Serial.println("Might be Fire in the grid Three");
+    }
+        Serial.println();
+        delay(1000);
+    if(DHT4.temperature > 70.0 || DHT4.humidity < 20.0 )
+    {
+        digitalWrite(buzz, HIGH);
+
+        BTmodule.print("Temperature in Celsius");
+        BTmodule.print(DHT4.temperature);
+        BTmodule.print("    Current humidity = ");
+        BTmodule.print(DHT4.humidity);
+        BTmodule.println();
+   
+        Serial.println("FIRE ALERT !!!!!");
+        BTmodule.println("FIRE ALERT !!!!!");
+
+        BTmodule.println("Might be Fire in the grid Four");
+        Serial.println("Might be Fire in the grid Four");
+    }
+        Serial.println();
+        delay(1000);
+       digitalWrite(buzz, LOW);
+}
